@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <meta charset="utf-8">
+    <title>Past Prompts</title>
+  </head>
+
+  <body>
+
+    <h1>Past Prompts</h1>
+
+    {% for prompt in prompts %}
+    <div>
+      <h2>
+        <a href="{{prompt.url()}}">{{prompt.title}}</a>
+      </h2>
+    </div>
+    {% endfor %}
+
+  </body>
+</html>

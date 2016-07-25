@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<title>{{writing.title}}</title>
+<head>
+  <link rel="stylesheet" href="stylesheets/style.css"/>
+</head>
+
+<h1>{{writing.title}}</h1>
+<p class="date">Written on {{writing.date}}</p>
+<p>{{writing.text}}</p>
+
+<form action="{{writing.url()}}" method="post">
+  <h3>Comments</h3>
+  <textarea name="comment" placeholder="Type your comment here"></textarea><br>
+  <button>Submit</button>
+</form>
+
+{% for comment in comments %}
+  <div class="comment">
+    <p>{{comment.name}}</p>
+    <p class="date">Posted on {{comment.date}}</p>
+    <p>{{comment.text}}</p>
+  </div>
+{% endfor %}

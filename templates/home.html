@@ -4,25 +4,21 @@
   <head>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <meta charset="utf-8">
-    <title> User Home </title>
+    <title>User Home</title>
   </head>
 
   <body>
+    <a href="/home">Home</a>
+    <a href="/past_writings">Past Writings</a>
+    <a href="/my_writings">My Writings</a>
 
-    <h1>Prompt of the Week</h1>
-    <p>Prompt</p>
-    <!--submit yours button: links to create writing -->
+    <h1>Prompt of the Day</h1>
+    <p>Insert Prompt Here</p>
 
-    <h2>Other Responses</h2>
+    <a href="/create">Submit your own response</a>
 
-    {% for writing in writings %}
-    <div>
-      <h3>
-        <a href="{{writing.urlHome()}}">{{writing.title}}</a>
-      </h3>
-      <p class="date">Written on {{writing.date}}</p>
-    </div>
-    {% endfor %}
+
+  <h3><a href="/prompt_writings">Other user's writings for this prompt</a></h3>
 
   </body>
 </html>

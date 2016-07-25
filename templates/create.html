@@ -12,9 +12,18 @@
     <h1>Respond to Prompt</h1>
     <p>Prompt</p>
 
-    <form action="{{writing.urlHome()}}" method="post">
-      <h3>Comments</h3>
-      <textarea class="comment" name="writing" placeholder="Type your writing here"></textarea><br>
+    <div>
+      <ul>
+        <li>No plagiarism!</li>
+        <li>Give your full effort</li>
+        <li>Constructive criticism only</li>
+        <li>Use common sense</li>
+      </ul>
+    </div>
+
+    <form action="{{writing.url()}}" method="post">
+      <input name="title" placeholder="Title"><br>
+      <textarea name="text" placeholder="Write here"></textarea><br>
       <button>Submit</button>
     </form>
 

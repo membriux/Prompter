@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <meta charset="utf-8">
+    <title>Past Writings</title>
+  </head>
+
+  <body>
+
+    <h1>Past Writings</h1>
+    <h2>Prompt: Insert prompt here</h2>
+
+    {% for writing in writings %}
+    <div>
+      <h2>
+        <a href="{{writing.url()}}">{{writing.title}}</a>
+      </h2>
+      <p class="date">Posted on {{writing.date}}</p>
+    </div>
+    {% endfor %}
+
+  </body>
+</html>

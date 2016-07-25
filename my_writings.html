@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <meta charset="utf-8">
+    <title>My Writings</title>
+  </head>
+
+  <body>
+
+    <h1>My Writings</h1>
+
+    {% for writing in writings %}
+    <div>
+      <h2>
+        <a href="{{writing.url()}}">{{writing.title}}</a>
+      </h2>
+      <p class="date">Posted on {{writing.date}}</p>
+    </div>
+    {% endfor %}
+
+  </body>
+</html>
