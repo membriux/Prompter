@@ -13,7 +13,7 @@ handlers:
   static_dir: templates/images
 
 - url: /stylesheets
-  static_dir: templates/stylesheets
+  static_dir: stylesheets
 
 - url: .*
   script: main.app
