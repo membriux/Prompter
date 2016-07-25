@@ -13,11 +13,14 @@ jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(template
 # 3. Render a response
 
 class User(ndb.Model):
-email = ndb.StringProperty()
+    email = ndb.StringProperty()
     name = ndb.StringProperty()
 
 class Prompt(ndb.Model):
     text = ndb.StringProperty()
+
+    def url(self):
+        return '/home?key=' + self.key.urlsafe()
 
 class Writing(ndb.Model):
     title = ndb.StringProperty()
@@ -25,6 +28,9 @@ class Writing(ndb.Model):
     date = ndb.DateTimeProperty(auto_now_add=True)
     user_key = ndb.KeyProperty(kind=User)
     prompt_key = ndb.KeyProperty(kind=Prompt)
+
+    def urlHome(self):
+        return '/home?key=' + self.key.urlsafe()
 
 class Comment(ndb.Model):
     # name from userkey
@@ -46,23 +52,47 @@ class MainHandler(webapp2.RequestHandler):
 #After login
 class HomeHandler(webapp2.RequestHandler):
     def get(self):
-        # 1. Get info from the request
-        # 2. Logic -- interact with the database
-        # 3. Render a response
-        template = jinja_environment.get_template(_____)
-        self.response.write(template.render())
+        urlsafe_key = self.request.get('key')
+        key = ndb.Key(urlsafe=urlsafe_key)
+        prompt = key.get()
+        writings = Writing.query(Writing.prompt_key == key).order(-Writing.date).fetch()
+        template_values = {'writings':writings}
+        template = jinja_environment.get_template("home.html")
+        self.response.write(template.render(template_values))
 
+    def post(self):
+        #1. get info from Request
+        title = self.request.get('title')
+        text = self.request.get('text')
+        #2. logic (interact with database)
+        new_writing = Writing(text=text, title=title)
+        new_writing.put()
+        #3. render response
+        self.redirect('/')
+
+# Use Google's page, don't make your own
 class UserHandler(webapp2.RequestHandler):
     def get(self):
-        template = jinja_environment.get_template(‘User.html')
-        self.response.write(template.render())
         # 1. Get info from the request
-        # 2. Logic -- interact with the database
-        # 3. Render a response
         user = users.get_current_user()
+        # 2. Logic -- interact with the database
+        user_values = {}
+        if user:
+            username = user.nickname()
+            logout_url = users.create_logout_url('/')
+            greeting = 'Welcome, {}! (<a href="{}">sign out</a>)'.format(
+                username, logout_url)
+            user_values = {'username':username}
+        else:
+            login_url = users.create_login_url('/')
+            greeting = '<a href="{}">Sign in</a>'.format(login_url)
+        self.response.write(
+            '<html><body>{}</body></html>'.format(greeting))
+        template = jinja_environment.get_template('Main.html')
+        #self.response.write(template.render(user_values))
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),    #Opening Page
-    ('/user', UserHandler),    #Get the User info
+    ('/user'), UserHandler),
     ('/home', HomeHandler)     #After Login
 ], debug=True)

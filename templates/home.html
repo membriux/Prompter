@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <meta charset="utf-8">
+    <title> User Home </title>
+  </head>
+
+  <body>
+
+    <h1>Prompt of the Week</h1>
+    <p>Prompt</p>
+    <!--submit yours button: links to create writing -->
+
+    <h2>Other Responses</h2>
+
+    {% for writing in writings %}
+    <div>
+      <h3>
+        <a href="{{writing.urlHome()}}">{{writing.title}}</a>
+      </h3>
+      <p class="date">Written on {{writing.date}}</p>
+    </div>
+    {% endfor %}
+
+  </body>
+</html>
