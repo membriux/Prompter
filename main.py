@@ -14,8 +14,7 @@ jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(template
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
-        template = jinja_environment.get_template('madlibs.html')
+        template = jinja_environment.get_template('Prompter.html')
         self.response.write(template.render())
 
 app = webapp2.WSGIApplication([
