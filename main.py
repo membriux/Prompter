@@ -28,13 +28,13 @@ class Writing(ndb.Model):
     prompt_key = ndb.KeyProperty(kind=Prompt)
 
     def urlPrompt(self):
-        return '/past_writings?key=' + self.key.urlsafe()
+        return '/past_writings?promptkey=' + self.key.urlsafe()
         # Returns the prompt's url to home with the prompt key
         # must incorporate both user and prompt keys and be accessible through my_writings and past_writings
         #/asdf?homekey=&userkey
 
     def urlMyWriting(self):
-        return '/my_writings?key=' + self.key.urlsafe()
+        return '/my_writings?userkey=' + self.key.urlsafe()
 
 
 class Comment(ndb.Model):
