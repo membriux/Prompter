@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  background-image: url(/Users/demouser/Desktop/CSSI/Prompter/images/Background2.jpg);
+  background-image: url('/images/Background2.jpg');
   background-size: 125%;
   opacity: 1;
   background-repeat: no-repeat;

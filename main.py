@@ -53,31 +53,28 @@ class UserHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user:
-            nickname = user.nickname()
-            logout_url = users.create_logout_url('/')
-            greeting = 'Welcome, {}! (<a href="{}">sign out</a>)'.format(
-                nickname, logout_url)
+            username = user.nickname()
+            self.redirect('/home')
         else:
-            login_url = users.create_login_url('/')
-            greeting = '<a href="{}">Sign in</a>'.format(login_url)
-        self.response.write(
-            '<html><body>{}</body></html>'.format(greeting))
+            login_url = users.create_login_url('/home')
+            self.redirect(login_url)
 
 #After login
 class HomeHandler(webapp2.RequestHandler):
     def get(self):
+        logout_url = users.create_logout_url('/')
+        template_value = {'logout_url':logout_url}
         template = jinja_environment.get_template("home.html")
-        self.response.write(template.render())
+        self.response.write(template.render(template_value))
 
-class 
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),    #Opening Page
     ('/user', UserHandler),
     ('/home', HomeHandler),     #After Login
-    ('/past_prompts', PastPromptHandler),
-    ('/create', CreateHandler),
-    ('/past_writings', PastWritingsHandler),
-    ('/my_writings', MyWritingsHandler),
-    ('/writing', WritingHandler)
+    #('/past_prompts', PastPromptHandler),
+    #('/create', CreateHandler),
+    #('/past_writings', PastWritingsHandler),
+    #('/my_writings', MyWritingsHandler),
+    #('/writing', WritingHandler)
 ], debug=True)
