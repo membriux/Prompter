@@ -2,7 +2,7 @@
 <html>
 
   <head>
-    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href='stylesheets/home.css'>
     <meta charset="utf-8">
     <title>User Home</title>
   </head>
@@ -14,7 +14,7 @@
 
         <div class="top-menu">
           <div>
-            <div class="menu-item"> <a href="/home"><p id="website-title"> Website Title </p> </a> </div>
+            <div class="menu-item"> <a href="/home"><p id="website-title"> &#9998; Just Write  </p> </a> </div>
             <div class="menu-item"> <a href="/home"> <p class="top-selector"> Home </p></a> </div>
             <div class="menu-item"> <a href="/past_prompts"> <p class="top-selector"> Past Prompts</p> </a> </div>
             <div class="menu-item"> <a href="/my_writings"> <p class="top-selector"> My Writings</p> </a> </div>
@@ -30,11 +30,13 @@
         </div>
 
         <div class="bottom">
-          <h1 class="prompt"> Prompt of the Day </h1>
-            <h3>{{prompt.title}}</h3>
-              <p>{{prompt.text}}</p>
-          <div class "submit-butns"> <a class="submit" href="/create"> Submit Your Story &#9656;</a>
-            <h3><a class="other-responses" href="{{prompt.url()}}">Other user's writings for this prompt</a></h3>
+          <h1 class="pod"> Prompt of the Day </h1>
+              <h3 class="prompt-title">{{prompt.title}}</h3>
+                <p class="prompt-text">{{prompt.text}}
+                  <a class="other-responses" href="{{prompt.url()}}">View Responses</a> </p>
+
+          <div class "submit-btn"> <a class="submit" href="/create"> Submit Your Response</a>
+
           </div>
       </div>
     </div>

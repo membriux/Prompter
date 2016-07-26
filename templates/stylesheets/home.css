@@ -1,4 +1,7 @@
 
+/* Copy and paste this css template for all pages up until the Prompt */
+
+
 html {
   background-color: #f1f1f1;
   margin: 0;
@@ -53,20 +56,21 @@ a {
 }
 
 .top-selector:hover {
-  border-bottom: 3px solid brown;
+  border-bottom: 5px solid brown;
+  font-weight: 400;
   color: brown;
   transition: color 0.5s ease;
   transition: border-bottom 0.1s ease;
-  background-color: #e6e6e6;
+  background-color: white;
 }
 
 #website-title {
   padding-right: 50px;
   color: white;
-  font-size: 2em;
-  font-weight: 400;
+  font-size: 2.4em;
+  font-weight: 100;
   text-decoration: none;
-  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
 }
 
 .dropdown {
@@ -117,18 +121,47 @@ a {
   height: 100%;
 }
 
-.prompt {
+
+
+
+        /*       Prompt of the day CSS below        */
+
+
+
+.pod {
+  text-decoration
   text-align: center;
-  font-size: 2.5em;
+  font-size: 4em;
+  font-weight:800;
+  font-family: Papyrus, fantasy;
+  color: black;
+  text-align: center;
+}
+
+.prompt-title {
+  text-align: center;
+  font-size: 2em;
   font-weight: 500;
   font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
   color: black;
   text-align: center;
 }
 
+.prompt-text {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 200;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  color: black;
+}
+
+.submit-btn {
+
+}
+
 .submit {
   text-decoration: none;
-  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  font-family: Consolas, monaco, monospace;
   font-weight: 100;
   background-color: #336699;
   padding: 10px 5px;
@@ -136,10 +169,12 @@ a {
 }
 
 .other-responses {
+  float: right;
   text-decoration: none;
-  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  font-size: 1em;
+  font-family: Consolas, monaco, monospace;
   font-weight: 100;
   background-color: #336699;
-  padding: 10px 10px;
+  padding: 10px;
   color: white;
 }

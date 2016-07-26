@@ -2,23 +2,44 @@
 <html>
 
   <head>
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href='stylesheets/home.css'>
     <meta charset="utf-8">
     <title>Past Prompts</title>
   </head>
 
   <body>
 
-    <h1>Past Prompts</h1>
+    <div class="background">
+      <div class="main-content">
 
-    {% for prompt in prompts %}
-    <div>
-      <h2>
-        <a href="{{prompt.url()}}">{{prompt.title}}</a>
-      </h2>
-      <p>Posted on {{prompt.date}}</p>
+        <div class="top-menu">
+          <div>
+            <div class="menu-item"> <a href="/home"><p id="website-title"> &#9998; Just Write  </p> </a> </div>
+            <div class="menu-item"> <a href="/home"> <p class="top-selector"> Home </p></a> </div>
+            <div class="menu-item"> <a href="/past_prompts"> <p class="top-selector"> Past Prompts</p> </a> </div>
+            <div class="menu-item"> <a href="/my_writings"> <p class="top-selector"> My Writings</p> </a> </div>
+          </div>
+
+          <div class="dropdown">
+            <button class="dropbuttton">My Account</button>
+            <div class="dropdown-content">
+              <a href="{{logout_url}}"> Logout </a>
+              <a href=""> Settings </a>
+            </div>
+          </div>
+        </div>
+        <!--  Put stuff here -->
+        {% for prompt in prompts %}
+        <div>
+          <h2>
+            <a href="{{prompt.url()}}">{{prompt.title}}</a>
+          </h2>
+          <p>Posted on {{prompt.date}}</p>
+        </div>
+        {% endfor %}
+
+      </div>
     </div>
-    {% endfor %}
 
   </body>
 </html>

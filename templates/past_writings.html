@@ -2,26 +2,50 @@
 <html>
 
   <head>
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href='stylesheets/home.css'>
     <meta charset="utf-8">
-    <title>Past Writings</title>
+    <title> Past Writings</title>
   </head>
 
   <body>
 
-    <h1>Writings For:</h1>
-    <h2>{{prompt.title}}</h2>
-    <p><em>{{prompt.text}}</em></p>
+    <div class="background">
+      <div class="main-content">
 
-    {% for writing in writings %}
-    <div>
-      <h2>
-        <a href="{{writing.url()}}">{{writing.title}}</a>
-      </h2>
-      <p class="date">Posted on {{writing.date}}</p>
-      <p>Written by {{writing.user_key.get().name}}</p>
+        <div class="top-menu">
+          <div>
+            <div class="menu-item"> <a href="/home"><p id="website-title"> &#9998; Just Write  </p> </a> </div>
+            <div class="menu-item"> <a href="/home"> <p class="top-selector"> Home </p></a> </div>
+            <div class="menu-item"> <a href="/past_prompts"> <p class="top-selector"> Past Prompts</p> </a> </div>
+            <div class="menu-item"> <a href="/my_writings"> <p class="top-selector"> My Writings</p> </a> </div>
+          </div>
+
+          <div class="dropdown">
+            <button class="dropbuttton">My Account</button>
+            <div class="dropdown-content">
+              <a href="{{logout_url}}"> Logout </a>
+              <a href=""> Settings </a>
+            </div>
+          </div>
+        </div>
+        <!--  Put stuff here -->
+
+        <h1>Writings For:</h1>
+        <h2>{{prompt.title}}</h2>
+        <p><em>{{prompt.text}}</em></p>
+
+        {% for writing in writings %}
+        <div>
+          <h2>
+            <a href="{{writing.url()}}">{{writing.title}}</a>
+          </h2>
+          <p class="date">Posted on {{writing.date}}</p>
+          <p>Written by {{writing.user_key.get().name}}</p>
+        </div>
+        {% endfor %}
+
+      </div>
     </div>
-    {% endfor %}
 
   </body>
 </html>

@@ -1,23 +1,50 @@
 <!DOCTYPE html>
 <title>{{writing.title}}</title>
 <head>
-  <link rel="stylesheet" href="stylesheets/style.css"/>
+  <link rel="stylesheet" href='stylesheets/home.css'>
+  <meta charset="utf-8">
 </head>
 
-<h1>{{writing.title}}</h1>
-<p class="date">Written by {{writing.user_key.get().name}} on {{writing.date}}</p>
-<p>{{writing.text}}</p>
+<body>
 
-<form action="{{writing.url()}}" method="post">
-  <h3>Comments</h3>
-  <textarea name="comment" placeholder="Type your comment here"></textarea><br>
-  <button>Submit</button>
-</form>
+  <div class="background">
+    <div class="main-content">
 
-{% for comment in comments %}
-  <div class="comment">
-    <p>{{comment.name}}</p>
-    <p class="date">Posted on {{comment.date}}</p>
-    <p>{{comment.text}}</p>
+      <div class="top-menu">
+        <div>
+          <div class="menu-item"> <a href="/home"><p id="website-title"> &#9998; Just Write  </p> </a> </div>
+          <div class="menu-item"> <a href="/home"> <p class="top-selector"> Home </p></a> </div>
+          <div class="menu-item"> <a href="/past_prompts"> <p class="top-selector"> Past Prompts</p> </a> </div>
+          <div class="menu-item"> <a href="/my_writings"> <p class="top-selector"> My Writings</p> </a> </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbuttton">My Account</button>
+          <div class="dropdown-content">
+            <a href="{{logout_url}}"> Logout </a>
+            <a href=""> Settings </a>
+          </div>
+        </div>
+      </div>
+      <!--  Put stuff here -->
+
+      <h1>{{writing.title}}</h1>
+      <p class="date">Written by {{writing.user_key.get().name}} on {{writing.date}}</p>
+      <p>{{writing.text}}</p>
+
+      <form action="{{writing.url()}}" method="post">
+        <h3>Comments</h3>
+        <textarea name="comment" placeholder="Type your comment here"></textarea><br>
+        <button>Submit</button>
+      </form>
+
+      {% for comment in comments %}
+        <div class="comment">
+          <p>{{comment.name}}</p>
+          <p class="date">Posted on {{comment.date}}</p>
+          <p>{{comment.text}}</p>
+        </div>
+      {% endfor %}
+
+    </div>
   </div>
-{% endfor %}

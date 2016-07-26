@@ -23,9 +23,9 @@ body {
 }
 
 .title {
-  font-size: 4em;
-  font-weight: 500;
-  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  font-size: 5.5em;
+  font-weight: 700;
+  font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
   color: white;
   text-align: center;
 }
