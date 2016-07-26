@@ -85,7 +85,7 @@ class HomeHandler(webapp2.RequestHandler):
 
 class CreateHandler(webapp2.RequestHandler):
     def get(self):
-        prompt = Prompt.query().order().get()
+        prompt = Prompt.query().order(-Prompt.date).get()
         template_value = {"promptTitle":prompt.title, "promptText":prompt.text}
         template = jinja_environment.get_template("create.html")
         self.response.write(template.render(template_value))
