@@ -8,16 +8,17 @@ template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir))
 
 class User(ndb.Model):
-    email = ndb.StringProperty()
     name = ndb.StringProperty()
+
+    def url(self):
+        return '/my_writings?key=' + self.key.urlsafe()
 
 class Prompt(ndb.Model):
     text = ndb.StringProperty()
     title = ndb.StringProperty()
 
-    #def url(self):
-        #return '/home?key=' + self.key.urlsafe()
-        # Returns the prompt's url to home with the prompt key
+    def url(self):
+        return '/past_prompts?key=' + self.key.urlsafe()
 
 class Writing(ndb.Model):
     title = ndb.StringProperty()
@@ -26,9 +27,15 @@ class Writing(ndb.Model):
     user_key = ndb.KeyProperty(kind=User)
     prompt_key = ndb.KeyProperty(kind=Prompt)
 
-    #def urlHome(self):
-        #return '/home?key=' + self.key.urlsafe()
+    def urlPrompt(self):
+        return '/past_writings?key=' + self.key.urlsafe()
         # Returns the prompt's url to home with the prompt key
+        # must incorporate both user and prompt keys and be accessible through my_writings and past_writings
+        #/asdf?homekey=&userkey
+
+    def urlMyWriting(self):
+        return '/my_writings?key=' + self.key.urlsafe()
+
 
 class Comment(ndb.Model):
     # username from userkey
@@ -67,30 +74,73 @@ class HomeHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("home.html")
         self.response.write(template.render(template_value))
 
-class PastPromptHandler(webapp2.RequestHandler):
-    def get(self):
-        template = jinja_environment.get_template("past_prompts.html")
-        self.response.write(template.render())
-
 class CreateHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template("create.html")
         self.response.write(template.render())
 
+    def post(self):
+        title = self.request.get('title')
+        text = self.request.get('text')
+
+        prompt_key_urlsafe = self.request.get('promptkey')
+        prompt_key = ndb.Key(urlsafe=prompt_key_urlsafe)
+        prompt = prompt_key.get()
+
+        user_key_urlsafe = self.request.get('userkey')
+        user_key = ndb.Key(urlsafe=user_key_urlsafe)
+        user = user_key.get()
+
+        newwriting = Writing(text=text, title=title, prompt_key=prompt.key, user_key=user.key) #also need user key
+        new_writing.put()
+
+        self.redirect(prompt.url()) #???
+
+class PastPromptHandler(webapp2.RequestHandler):
+    def get(self):
+        prompts = Prompt.query().order(-Prompt.date).fetch()
+        template_values = {'prompts':prompts}
+        template = jinja_environment.get_template("past_prompts.html")
+        self.response.write(template.render(template_values))
+
 class PastWritingsHandler(webapp2.RequestHandler):
     def get(self):
+        urlsafe_key = self.request.get('key')
+        key = ndb.Key(urlsafe=urlsafe_key)
+        writing = key.get()
+        writings = Writing.query(Writing.prompt_key == key).order(-Writing.date).fetch()
+        template_values = {'writings':writings}
         template = jinja_environment.get_template("past_writings.html")
-        self.response.write(template.render())
+        self.response.write(template.render(template_values))
 
 class MyWritingsHandler(webapp2.RequestHandler):
     def get(self):
+        urlsafe_key = self.request.get('key')
+        key = ndb.Key(urlsafe=urlsafe_key)
+        writing = key.get()
+        writings = Writing.query(Writing.user_key == key).order(-Writing.date).fetch()
+        template_values = {'writings':writings}
         template = jinja_environment.get_template("my_writings.html")
-        self.response.write(template.render())
+        self.response.write(template.render(template_values))
 
 class WritingHandler(webapp2.RequestHandler):
     def get(self):
-        template = jinja_environment.get_template("writings.html")
-        self.response.write(template.render())
+        urlsafe_key = self.request.get('key')
+        key = ndb.Key(urlsafe=urlsafe_key)
+        writing = key.get()
+        comments = Comment.query(Comment.writing_key == key).order(-Comment.date).fetch()
+        template_values = {'writing':writing, 'comments':comments}
+        template = jinja_environment.get_template("writing.html")
+        self.response.write(template.render(template_values))
+
+    def post(self):
+        text = self.request.get('comment')
+        writing_key_urlsafe = self.request.get('key')
+        writing_key = ndb.Key(urlsafe=writing_key_urlsafe)
+        writing = writing_key.get()
+        comment = Comment(text=text, name="Anonymous", post_key=post.key) #change from anonymous to user name
+        comment.put()
+        self.redirect(writing.url())
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),    #Opening Page
