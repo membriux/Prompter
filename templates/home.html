@@ -14,12 +14,13 @@
     <a href="{{logout_url}}">Log-Out</a>
 
     <h1>Prompt of the Day</h1>
-    <p>Insert Prompt Here</p>
+    <h3>{{promptTitle}}</h3>
+    <p>{{promptText}}</p>
 
     <a href="/create">Submit your own response</a>
 
 
-  <h3><a href="/">Other user's writings for this prompt</a></h3>
+  <h3><a href="/past_writings?key={{promptKey}}">Other user's writings for this prompt</a></h3>
   #CHANGE THIS LINK to archive of recent post
 
   </body>

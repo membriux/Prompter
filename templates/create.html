@@ -10,7 +10,8 @@
   <body>
 
     <h1>Respond to Prompt</h1>
-    <p>Prompt</p>
+    <h3>{{promptTitle}}</h3>
+    <p>{{promptText}}</p>
 
     <div>
       <ul>
@@ -21,7 +22,7 @@
       </ul>
     </div>
 
-    <form action="{{writing.url()}}" method="post">
+    <form action="/my_writings" method="post">
       <input name="title" placeholder="Title"><br>
       <textarea name="text" placeholder="Write here"></textarea><br>
       <button>Submit</button>
