@@ -10,6 +10,17 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: Comment
+  properties:
+  - name: writing_key
+  - name: date
+
+- kind: Comment
+  properties:
+  - name: writing_key
+  - name: date
+    direction: desc
+
 - kind: Writing
   properties:
   - name: prompt_key

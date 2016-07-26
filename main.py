@@ -45,7 +45,7 @@ class Writing(ndb.Model):
         # must incorporate both user and prompt keys and be accessible through my_writings and past_writings
 
 class Comment(ndb.Model):
-    # username from userkey
+    name = ndb.StringProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)
     text = ndb.StringProperty()
     user_key = ndb.KeyProperty(kind=User)
@@ -78,7 +78,7 @@ class UserHandler(webapp2.RequestHandler):
 class HomeHandler(webapp2.RequestHandler):
     def get(self):
         logout_url = users.create_logout_url('/')
-        prompt = Prompt.query().order().get()
+        prompt = Prompt.query().order(-Prompt.date).get()
         template_value = {'logout_url':logout_url,"prompt":prompt}
         template = jinja_environment.get_template("home.html")
         self.response.write(template.render(template_value))
@@ -105,6 +105,7 @@ class CreateHandler(webapp2.RequestHandler):
 
         new_writing = Writing(text=text, title=title, prompt_key=prompt.key, user_key=current_user.key) #also need user key
         new_writing.put()
+        self.redirect('/past_prompts')
 
 class PastPromptHandler(webapp2.RequestHandler):
     def get(self):
@@ -127,8 +128,8 @@ class MyWritingsHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         nickname = user.nickname()
-        user_object = User.query(User.name==nickname).get()
-        writings = Writing.query(Writing.user_key == user_object.key).order(-Writing.date).fetch()
+        current_user = User.query(User.name==nickname).get()
+        writings = Writing.query(Writing.user_key == current_user.key).order(-Writing.date).fetch()
         template_values = {'writings':writings}
         template = jinja_environment.get_template("my_writings.html")
         self.response.write(template.render(template_values))
@@ -138,7 +139,7 @@ class WritingHandler(webapp2.RequestHandler):
         urlsafe_key = self.request.get('key')
         key = ndb.Key(urlsafe=urlsafe_key)
         writing = key.get()
-        comments = Comment.query(Comment.writing_key == key).order(-Comment.date).fetch()
+        comments = Comment.query(Comment.writing_key == key).order(Comment.date).fetch()
         template_values = {'writing':writing, 'comments':comments}
         template = jinja_environment.get_template("writing.html")
         self.response.write(template.render(template_values))
@@ -148,7 +149,10 @@ class WritingHandler(webapp2.RequestHandler):
         writing_key_urlsafe = self.request.get('key')
         writing_key = ndb.Key(urlsafe=writing_key_urlsafe)
         writing = writing_key.get()
-        comment = Comment(text=text, name="Anonymous", post_key=post.key) #change from anonymous to user name
+        user = users.get_current_user()
+        nickname = user.nickname()
+        current_user = User.query(User.name==nickname).get()
+        comment = Comment(text=text, name=current_user.name, writing_key=writing.key) #change from anonymous to user name
         comment.put()
         self.redirect(writing.url())
 
