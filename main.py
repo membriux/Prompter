@@ -10,6 +10,17 @@ jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(template
 class User(ndb.Model):
     name = ndb.StringProperty()
 
+    @staticmethod
+    def get():
+        user = users.get_current_user()
+        if user:
+            nickname = user.nickname()
+            user_object = User.query(User.name==nickname).get()
+            if not user_object:
+                new_user = User(name=nickname)
+                new_user.put()
+        return user
+
     def url(self):
         return '/my_writings?key=' + self.key.urlsafe()
 
@@ -56,10 +67,11 @@ class UserHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user:
-            username = user.nickname()
+            User.get()
             self.redirect('/home')
         else:
-            login_url = users.create_login_url('/home')
+            login_url = users.create_login_url('/user')
+            User.get()
             self.redirect(login_url)
 
 #After login
@@ -82,19 +94,17 @@ class CreateHandler(webapp2.RequestHandler):
         title = self.request.get('title')
         text = self.request.get('text')
 
-        prompt_key_urlsafe = self.request.get('promptkey')
-        prompt_key = ndb.Key(urlsafe=prompt_key_urlsafe)
-        prompt = prompt_key.get()
+        prompt = Prompt.query().order().get()
 
         user = users.get_current_user()
+        nickname = user.nickname()
+        current_user = User.query(User.name==nickname).get()
         #user_key_urlsafe = user.key
         #user_key = ndb.Key(urlsafe=user_key_urlsafe)
         #user = user_key.get()
 
-        new_writing = Writing(text=text, title=title, prompt_key=prompt.key, user_key=user.key) #also need user key
+        new_writing = Writing(text=text, title=title, prompt_key=prompt.key, user_key=current_user.key) #also need user key
         new_writing.put()
-
-        self.redirect(prompt.url()) #???
 
 class PastPromptHandler(webapp2.RequestHandler):
     def get(self):
