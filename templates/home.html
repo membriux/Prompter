@@ -9,19 +9,18 @@
 
   <body>
     <a href="/home">Home</a>
-    <a href="/past_writings">Past Writings</a>
+    <a href="/past_prompts">Past Prompts</a>
     <a href="/my_writings">My Writings</a>
     <a href="{{logout_url}}">Log-Out</a>
 
     <h1>Prompt of the Day</h1>
-    <h3>{{promptTitle}}</h3>
-    <p>{{promptText}}</p>
+    <h3>{{prompt.title}}</h3>
+    <p>{{prompt.text}}</p>
 
     <a href="/create">Submit your own response</a>
 
 
-  <h3><a href="/past_writings?key={{promptKey}}">Other user's writings for this prompt</a></h3>
-  #CHANGE THIS LINK to archive of recent post
+  <h3><a href="{{prompt.url()}}">Other user's writings for this prompt</a></h3>
 
   </body>
 </html>
