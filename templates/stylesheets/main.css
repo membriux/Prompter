@@ -1,0 +1,62 @@
+html {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-image: url('/images/Background2.jpg');
+  background-size: 125%;
+  opacity: 1;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.main-container {
+  width: 60%;
+  /*justify-content: ;*/
+  /*margin: auto;*/
+  /*margin-top: 23%;*/
+}
+
+.title {
+  font-size: 4em;
+  font-weight: 500;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.login-container {
+  /*width: 30%;*/
+  /*padding: 5px %;*/
+  /*float: center;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-in {
+  -webkit-font-smoothing: antialiased;
+  font-weight: 300;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  font-size: 2em;
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  padding: 8px 25px;
+  /*display: block;*/
+  background-color: #336699;
+  text-align: center;
+}
+
+.sign-in:hover {
+  background-color: #4080bf;
+}
+
+.sign-in:after {
+  content: "";
+}

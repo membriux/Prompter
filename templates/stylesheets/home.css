@@ -1,0 +1,145 @@
+
+html {
+  background-color: #f1f1f1;
+  margin: 0;
+  height: 100%;
+  padding: 25px;
+}
+
+body {
+  margin: 0;
+  background-color: white;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.background {
+  height: 100%;
+  background-color: #f1f1f1;
+}
+
+.main-content {
+  background-color: white;
+  height: 100%;
+  margin: ;
+  padding: 25px;
+}
+
+.top-menu {
+  border-bottom: 8px solid #336699;
+  background-color: #2e2e2e;
+  padding: 0px 20px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-item {
+  margin: 0;
+  display: inline-block;
+}
+
+.top-selector {
+  color: white;
+  height: 100%;
+  font-size: 1.3em;
+  font-weight: 200;
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  padding: 5px 15px;
+}
+
+.top-selector:hover {
+  border-bottom: 3px solid brown;
+  color: brown;
+  transition: color 0.5s ease;
+  transition: border-bottom 0.1s ease;
+  background-color: #e6e6e6;
+}
+
+#website-title {
+  padding-right: 50px;
+  color: white;
+  font-size: 2em;
+  font-weight: 400;
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+}
+
+.dropdown {
+  margin: auto 0;
+  width: 140px;
+}
+
+.dropbuttton {
+  background-color: #336699;
+  color: white;
+  padding: 15px;
+  font-size: 1.3em;
+  font-weight: 200;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 131px;
+}
+
+.dropdown-content a {
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #e6e6e6;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: white;
+}
+
+.bottom {
+  width: 90%;
+  height: 100%;
+}
+
+.prompt {
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: 500;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  color: black;
+  text-align: center;
+}
+
+.submit {
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  font-weight: 100;
+  background-color: #336699;
+  padding: 10px 5px;
+  color: white;
+}
+
+.other-responses {
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  font-weight: 100;
+  background-color: #336699;
+  padding: 10px 10px;
+  color: white;
+}
