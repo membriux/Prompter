@@ -57,7 +57,7 @@ class UserHandler(webapp2.RequestHandler):
             self.redirect('/home')
         else:
             login_url = users.create_login_url('/home')
-            self.redirect('/' + login_url)
+            self.redirect(login_url)
 
 #After login
 class HomeHandler(webapp2.RequestHandler):
