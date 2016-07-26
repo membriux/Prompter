@@ -94,7 +94,7 @@ class CreateHandler(webapp2.RequestHandler):
         title = self.request.get('title')
         text = self.request.get('text')
 
-        prompt = Prompt.query().order().get()
+        prompt = Prompt.query().order(-Prompt.date).get()
 
         user = users.get_current_user()
         nickname = user.nickname()
