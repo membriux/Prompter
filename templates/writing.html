@@ -5,7 +5,7 @@
 </head>
 
 <h1>{{writing.title}}</h1>
-<p class="date">Written on {{writing.date}}</p>
+<p class="date">Written by {{writing.user_key.get().name}} on {{writing.date}}</p>
 <p>{{writing.text}}</p>
 
 <form action="{{writing.url()}}" method="post">
