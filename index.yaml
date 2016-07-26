@@ -15,3 +15,9 @@ indexes:
   - name: prompt_key
   - name: date
     direction: desc
+
+- kind: Writing
+  properties:
+  - name: user_key
+  - name: date
+    direction: desc

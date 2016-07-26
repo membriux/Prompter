@@ -125,11 +125,10 @@ class PastWritingsHandler(webapp2.RequestHandler):
 
 class MyWritingsHandler(webapp2.RequestHandler):
     def get(self):
-        #urlsafe_key = self.request.get('key')
-        #key = ndb.Key(urlsafe=urlsafe_key)
-        #writing = key.get()
         user = users.get_current_user()
-        writings = Writing.query(Writing.user_key == user.key).order(-Writing.date).fetch()
+        nickname = user.nickname()
+        user_object = User.query(User.name==nickname).get()
+        writings = Writing.query(Writing.user_key == user_object.key).order(-Writing.date).fetch()
         template_values = {'writings':writings}
         template = jinja_environment.get_template("my_writings.html")
         self.response.write(template.render(template_values))
