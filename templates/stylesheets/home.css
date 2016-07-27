@@ -2,6 +2,8 @@
 /* Copy and paste this css template for all pages up until the Prompt */
 
 
+/*                Top menu template CSS.              */
+
 html {
   background-color: #f1f1f1;
   margin: 0;
@@ -26,8 +28,8 @@ a {
 
 .main-content {
   background-color: white;
-  height: 100%;
-  margin: ;
+  height: 100% auto;
+  margin: 0;
   padding: 25px;
 }
 
@@ -35,7 +37,7 @@ a {
   border-bottom: 8px solid #336699;
   background-color: #2e2e2e;
   padding: 0px 20px;
-  width: 90%;
+  width: 95.5%;
   display: flex;
   justify-content: space-between;
 }
@@ -75,13 +77,9 @@ a {
 
 .dropdown {
   margin: auto 0;
-  width: 140px;
 }
 
 .dropbuttton {
-  background-color: #336699;
-  color: white;
-  padding: 15px;
   font-size: 1.3em;
   font-weight: 200;
   border: none;
@@ -93,7 +91,6 @@ a {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  width: 131px;
 }
 
 .dropdown-content a {
@@ -117,11 +114,42 @@ a {
 }
 
 .bottom {
-  width: 90%;
+  width: 100%;
   height: 100%;
 }
 
+#account_container {
+  width: 130px;
+}
 
+#account_button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #336699;
+  color: white;
+  width: 135px;
+}
+
+#account_drop {
+    width: 135px;
+}
+
+#about_button {
+  margin-top: 10px;
+  background-color: #2e2e2e;
+  color: #79a6d2;
+  height: 100%;
+  font-size: 1.3em;
+  font-weight: 200;
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  padding: 5px 15px;
+}
+
+#about:hover {
+  font-weight: 400;
+  transition: color 0.5s ease;
+}
 
 
         /*       Prompt of the day CSS below        */
@@ -129,7 +157,6 @@ a {
 
 
 .pod {
-  text-decoration
   text-align: center;
   font-size: 4em;
   font-weight:800;
@@ -147,33 +174,73 @@ a {
   text-align: center;
 }
 
-.prompt-text {
+.prompt-container {
+
+  display: inline-block;
+  width: 96%;
+  height: auto;
+  padding: 5px;
+  background-color: #DADADA;
+  border: 15px solid #DADADA;
+  margin-bottom: 35px;
+}
+
+.prompt-body {
+  word-wrap: break-word;
   text-align: left;
-  font-size: 1.5em;
-  font-weight: 200;
-  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  min-height: 30px;
+  border-radius: 3px;
+  font-family: Arial;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #797979;
+}
+
+.prompt-text {
+  word-wrap: break-word;
+  padding: 10px;
+  min-height: 30px;
+  border-radius: 3px;
+  font-size: 2em;
+  line-height: 1.5;
+  font-family: 'Helvetica Neue', Helvetica , Arial, sans-serif;
   color: black;
 }
 
-.submit-btn {
+.response-container {
+  display: block;
+  width: 100%;
+}
+
+.view-responses {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  border: solid 5px #DADADA;
+  padding: 8px;
+  border-radius: 5%;
+  float: right;
+  text-decoration: none;
+  font-size: 1.5em;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  font-weight: 200;
+  background-color: #DADADA;
+  color: #336699;
+}
+
+.submit-button {
+  display: flex;
+  justify-content: center;
 }
 
 .submit {
   text-decoration: none;
+  font-size: 1.2em;
   font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
   font-weight: 200;
   background-color: #336699;
-  padding: 10px 5px;
-  color: white;
-}
-
-.view-responses {
-  float: right;
-  text-decoration: none;
-  font-size: .8em;
-  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
-  font-weight: 100;
-  background-color: #336699;
-  padding: 10px;
+  padding: 12px;
   color: white;
 }
