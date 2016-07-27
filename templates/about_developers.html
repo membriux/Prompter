@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href='stylesheets/home.css'>
+    <meta charset="utf-8">
+    <title>User Home</title>
+  </head>
+
+  <style>
+    img {
+      border-radius: 50%;
+      background-color: lightblue;
+      border: solid white 1px;
+      margin: 50px;
+    }
+
+    .developers {
+      text-align: center;
+    }
+
+    figure {
+      display: inline-block;
+    }
+
+    figcaption {
+      display: block;
+      margin: auto;
+    }
+  </style>
+
+  <body>
+    <div class="background">
+
+      <div class="main-content">
+
+        <div class="top-menu">
+          <div>
+            <div class="menu-item"> <a href="/home"><p id="website-title"> &#9998; Just Write  </p> </a> </div>
+            <div class="menu-item"> <a href="/home"> <p class="top-selector"> Home </p></a> </div>
+            <div class="menu-item"> <a href="/past_prompts"> <p class="top-selector"> Past Prompts</p> </a> </div>
+            <div class="menu-item"> <a href="/my_writings"> <p class="top-selector"> My Writings</p> </a> </div>
+          </div>
+
+          <div class="dropdown">
+            <button class="dropbuttton">My Account</button>
+            <div class="dropdown-content">
+              <a href="{{logout_url}}"> Logout </a>
+              <a href=""> Settings </a>
+            </div>
+          </div>
+        </div>
+
+        <h1>About the Developers</h1>
+
+        <p>Just Write was created by three recent high school graduates as their final project for Google's Computer
+        Science Summer Institute (CSSI).</p>
+
+        <div class="developers">
+          <h2>Developers:</h2>
+
+          <figure>
+            <img src="images/goldendoodle.jpg" width="250" height="250">
+            <figcaption>Guillermo Sanchez</figcaption>
+          </figure>
+
+          <figure>
+            <img src="images/goldendoodle.jpg" width="250" height="250">
+            <figcaption>Sherene Victor</figcaption>
+          </figure>
+
+          <figure>
+            <img src="images/goldendoodle.jpg" width="250" height="250">
+            <figcaption>Gianna Chien</figcaption>
+          </figure>
+
+        </div>
+
+  </body>
+</html>
