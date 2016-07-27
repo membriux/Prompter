@@ -33,13 +33,17 @@
             <a href=""> Settings </a>
           </div>
         </div>
-        
+
       </div>
       <!--  Put stuff here -->
 
       <h1>{{writing.title}}</h1>
       <p class="date">Written by {{writing.user_key.get().name}} on {{writing.date}}</p>
       <p>{{writing.text}}</p>
+
+      <form action="{{writing.url()}}" method="post">
+        <button name="vote" value="1">Vote</button>
+      </form>
 
       <form action="{{writing.url()}}" method="post">
         <h3>Comments</h3>
