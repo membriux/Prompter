@@ -156,6 +156,18 @@ class WritingHandler(webapp2.RequestHandler):
         comment.put()
         self.redirect(writing.url())
 
+class AdminHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template("admin.html")
+        self.response.write(template.render())
+
+    def post(self):
+        text = self.request.get('text')
+        title = self.request.get('title')
+        new_prompt = Prompt(title=title, text=text)
+        new_prompt.put()
+        self.redirect('/adminCSSI16secrets')
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),    #Opening Page
     ('/user', UserHandler),
@@ -164,5 +176,6 @@ app = webapp2.WSGIApplication([
     ('/create', CreateHandler),
     ('/past_writings', PastWritingsHandler),
     ('/my_writings', MyWritingsHandler),
-    ('/writing', WritingHandler)
+    ('/writing', WritingHandler),
+    ('/adminCSSI16secrets', AdminHandler)
 ], debug=True)
