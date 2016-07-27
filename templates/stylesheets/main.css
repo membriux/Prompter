@@ -43,7 +43,7 @@ body {
   -webkit-font-smoothing: antialiased;
   font-weight: 300;
   font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
-  font-size: 2em;
+  font-size: 1.8em;
   text-decoration: none;
   color: white;
   text-transform: uppercase;
@@ -59,4 +59,17 @@ body {
 
 .sign-in:after {
   content: "";
+}
+
+.description-container {
+  position: relative;
+  margin-top: -45px;
+}
+
+.description {
+  font-size: 1.5em;
+  font-weight: 700;
+  font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+  color: white;
+  text-align: center;
 }

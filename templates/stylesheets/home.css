@@ -167,7 +167,7 @@ a {
 
 .prompt-title {
   text-align: center;
-  font-size: 2em;
+  font-size: 2.4em;
   font-weight: 500;
   font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
   color: black;
@@ -175,13 +175,13 @@ a {
 }
 
 .prompt-container {
-
+  border-radius: 1%;
   display: inline-block;
   width: 96%;
   height: auto;
   padding: 5px;
-  background-color: #DADADA;
-  border: 15px solid #DADADA;
+  background-color: #f2f2f2;
+  border: 15px solid #f2f2f2;
   margin-bottom: 35px;
 }
 
@@ -201,7 +201,7 @@ a {
   padding: 10px;
   min-height: 30px;
   border-radius: 3px;
-  font-size: 2em;
+  font-size: 1.8em;
   line-height: 1.5;
   font-family: 'Helvetica Neue', Helvetica , Arial, sans-serif;
   color: black;
@@ -218,7 +218,7 @@ a {
   justify-content: flex-end;
   align-items: flex-end;
   flex-wrap: wrap;
-  border: solid 5px #DADADA;
+  border: solid 5px #f2f2f2;
   padding: 8px;
   border-radius: 5%;
   float: right;
@@ -226,8 +226,12 @@ a {
   font-size: 1.5em;
   font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
   font-weight: 200;
-  background-color: #DADADA;
+  background-color: #f2f2f2;
   color: #336699;
+}
+
+.view-responses:hover {
+  font-weight: 400;
 }
 
 .submit-button {
@@ -237,10 +241,14 @@ a {
 
 .submit {
   text-decoration: none;
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
   font-weight: 200;
   background-color: #336699;
   padding: 12px;
   color: white;
+}
+
+.submit:hover{
+  background-color: #4080bf;
 }

@@ -20,13 +20,22 @@
             <div class="menu-item"> <a href="/my_writings"> <p class="top-selector"> My Writings</p> </a> </div>
           </div>
 
-          <div class="dropdown">
-            <button class="dropbuttton">My Account</button>
-            <div class="dropdown-content">
+          <div id="about" class="dropdown">
+            <button class="dropbuttton" id="about_button"> About &#9662; </button>
+            <div class="dropdown-content" id="about_dropdown">
+              <a href="/about_site"> Site </a>
+              <a href="/about_developers"> Developers </a>
+            </div>
+          </div>
+
+          <div class="dropdown" id="account_container">
+            <button class="dropbuttton" id="account_button"> My Account </button>
+            <div class="dropdown-content" id="account_drop">
               <a href="{{logout_url}}"> Logout </a>
               <a href=""> Settings </a>
             </div>
           </div>
+          
         </div>
 
         <div class="bottom">
