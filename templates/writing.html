@@ -33,6 +33,10 @@
       <p>{{writing.text}}</p>
 
       <form action="{{writing.url()}}" method="post">
+        <button name="vote" value="1">Vote</button>
+      </form>
+
+      <form action="{{writing.url()}}" method="post">
         <h3>Comments</h3>
         <textarea name="comment" placeholder="Type your comment here"></textarea><br>
         <button>Submit</button>

@@ -1,6 +1,7 @@
 import webapp2
 import jinja2
 import os
+import logging
 from google.appengine.ext import ndb
 from google.appengine.api import users
 
@@ -38,11 +39,30 @@ class Writing(ndb.Model):
     date = ndb.DateTimeProperty(auto_now_add=True)
     user_key = ndb.KeyProperty(kind=User)
     prompt_key = ndb.KeyProperty(kind=Prompt)
+    count = ndb.IntegerProperty()
+    user_votes = ndb.KeyProperty(kind=User, repeated=True)
 
     def url(self):
         return '/writing?key=' + self.key.urlsafe()
         #Returns the prompt's url to home with the prompt key
         # must incorporate both user and prompt keys and be accessible through my_writings and past_writings
+
+    #method to check if user voted
+    def voted(self, user):
+        if self.user_votes:
+            if user.key in self.user_votes:
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    #method to see if writing already has votes
+    def voteCount(self):
+        if self.count == None:
+            return 0
+        else:
+            return self.count
 
 class Comment(ndb.Model):
     name = ndb.StringProperty()
@@ -79,7 +99,34 @@ class HomeHandler(webapp2.RequestHandler):
     def get(self):
         logout_url = users.create_logout_url('/')
         prompt = Prompt.query().order(-Prompt.date).get()
-        template_value = {'logout_url':logout_url,"prompt":prompt}
+
+        #Filter writing from second to last prompt (second most recent)
+        two_prompts = Prompt.query().order(-Prompt.date).fetch(2)
+        #Order by date, most recent first
+        #Fetch the first two
+        featured_prompt = two_prompts[1]
+        #Then take the second of the two and get key
+        featured_prompt_key = featured_prompt.key
+
+        #take all writings for that prompt
+        forPrompt_writings = Writing.query(Writing.prompt_key == featured_prompt_key).order(-Writing.date).fetch()
+        special_writings = {}
+
+        #loop and find the count for each writing
+        for forPrompt_writing in forPrompt_writings:
+            vote_count = forPrompt_writing.count
+            #Value of dict: count of votes (int)
+            key_of_writing = forPrompt_writing.key
+            #Key of dict: writing.key of writing page (key)
+            special_writings[key_of_writing] = vote_count
+
+        most_vote = max(special_writings, key=special_writings.get)
+        #Find max value from dict and matching writing.key
+
+        featured_story = most_vote.get()
+        #Send writing.key to home and add it on featured bubble
+
+        template_value = {'logout_url':logout_url,"prompt":prompt, "featured_story":featured_story}
         template = jinja_environment.get_template("home.html")
         self.response.write(template.render(template_value))
 
@@ -140,25 +187,48 @@ class MyWritingsHandler(webapp2.RequestHandler):
 
 class WritingHandler(webapp2.RequestHandler):
     def get(self):
-        logout_url = users.create_logout_url('/')
         urlsafe_key = self.request.get('key')
         key = ndb.Key(urlsafe=urlsafe_key)
         writing = key.get()
         comments = Comment.query(Comment.writing_key == key).order(Comment.date).fetch()
-        template_values = {'writing':writing, 'comments':comments, 'logout_url':logout_url}
+        template_values = {'writing':writing, 'comments':comments}
         template = jinja_environment.get_template("writing.html")
         self.response.write(template.render(template_values))
 
     def post(self):
-        text = self.request.get('comment')
-        writing_key_urlsafe = self.request.get('key')
-        writing_key = ndb.Key(urlsafe=writing_key_urlsafe)
-        writing = writing_key.get()
+        vote = self.request.get('vote')
+        logging.info(vote)
+
         user = users.get_current_user()
         nickname = user.nickname()
         current_user = User.query(User.name==nickname).get()
-        comment = Comment(text=text, name=current_user.name, writing_key=writing.key) #change from anonymous to user name
-        comment.put()
+
+        writing_key_urlsafe = self.request.get('key')
+        writing_key = ndb.Key(urlsafe=writing_key_urlsafe)
+        writing = writing_key.get()
+
+        #if vote button is pressed
+        if vote:
+            check_vote = writing.voted(current_user)
+            check_count = writing.voteCount()
+            writing.count = check_count
+            writing.put()
+            if check_vote:
+                logging.info("You have already voted!")
+            else:
+                logging.info("New Vote!")
+                writing.user_votes.append(current_user.key)
+                logging.info(writing.user_votes)
+                writing.count = writing.count + 1
+                writing.put()
+        #if posting a comment
+        else:
+            text = self.request.get('comment')
+            writing_key_urlsafe = self.request.get('key')
+            writing_key = ndb.Key(urlsafe=writing_key_urlsafe)
+            writing = writing_key.get()
+            comment = Comment(text=text, name=current_user.name, writing_key=writing.key) #change from anonymous to user name
+            comment.put()
         self.redirect(writing.url())
 
 class AdminHandler(webapp2.RequestHandler):
