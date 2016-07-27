@@ -92,6 +92,9 @@ class CreateHandler(webapp2.RequestHandler):
 
     def post(self):
         title = self.request.get('title')
+        if title == "":
+            title = "[No Title]"
+
         text = self.request.get('text')
 
         prompt = Prompt.query().order(-Prompt.date).get()
@@ -99,9 +102,6 @@ class CreateHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         nickname = user.nickname()
         current_user = User.query(User.name==nickname).get()
-        #user_key_urlsafe = user.key
-        #user_key = ndb.Key(urlsafe=user_key_urlsafe)
-        #user = user_key.get()
 
         new_writing = Writing(text=text, title=title, prompt_key=prompt.key, user_key=current_user.key) #also need user key
         new_writing.put()
