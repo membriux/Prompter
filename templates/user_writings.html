@@ -4,7 +4,7 @@
   <head>
     <link rel="stylesheet" href='stylesheets/home.css'>
     <meta charset="utf-8">
-    <title> Past Writings</title>
+    <title>User Home</title>
   </head>
 
   <body>
@@ -38,10 +38,7 @@
 
         </div>
         <!--  Put stuff here -->
-
-        <h1>Writings For:</h1>
-        <h2>{{prompt.title}}</h2>
-        <p><em>{{prompt.text}}</em></p>
+        <h1>Writings By {{user.name}}</h1>
 
         {% for writing in writings %}
         <div>
@@ -49,12 +46,13 @@
             <a href="{{writing.url()}}">{{writing.title}}</a>
           </h2>
           <p class="date">Posted on {{writing.date}}</p>
-          <p>Written by <a href="{{writing.user_key.get().url()}}">{{writing.user_key.get().name}}</a></p>
         </div>
         {% endfor %}
 
       </div>
     </div>
+
+
 
   </body>
 </html>

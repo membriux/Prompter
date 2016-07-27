@@ -38,7 +38,7 @@
       <!--  Put stuff here -->
 
       <h1>{{writing.title}}</h1>
-      <p class="date">Written by {{writing.user_key.get().name}} on {{writing.date}}</p>
+      <p class="date">Written by <a href="{{writing.user_key.get().url()}}">{{writing.user_key.get().name}}</a> on {{writing.date}}</p>
       <p>{{writing.text}}</p>
 
       <form action="{{writing.url()}}" method="post">
@@ -53,7 +53,7 @@
 
       {% for comment in comments %}
         <div class="comment">
-          <p>{{comment.name}}</p>
+          <p><a href="{{comment.user_key.get().url()}}">{{comment.name}}</a></p>
           <p class="date">Posted on {{comment.date}}</p>
           <p>{{comment.text}}</p>
         </div>

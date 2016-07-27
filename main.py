@@ -23,7 +23,7 @@ class User(ndb.Model):
         return user
 
     def url(self):
-        return '/my_writings?key=' + self.key.urlsafe()
+        return '/user_writings?key=' + self.key.urlsafe()
 
 class Prompt(ndb.Model):
     text = ndb.StringProperty()
@@ -227,9 +227,21 @@ class WritingHandler(webapp2.RequestHandler):
             writing_key_urlsafe = self.request.get('key')
             writing_key = ndb.Key(urlsafe=writing_key_urlsafe)
             writing = writing_key.get()
-            comment = Comment(text=text, name=current_user.name, writing_key=writing.key) #change from anonymous to user name
+            comment = Comment(text=text, name=current_user.name, writing_key=writing.key, user_key=current_user.key)
             comment.put()
         self.redirect(writing.url())
+
+class UserPageHandler(webapp2.RequestHandler):
+    def get(self):
+        logout_url = users.create_logout_url('/')
+        urlsafe_key = self.request.get('key')
+        key = ndb.Key(urlsafe=urlsafe_key)
+        user = key.get()
+        #logging.info("You've made it to this page")
+        writings = Writing.query(Writing.user_key == key).order(-Writing.date).fetch()
+        template_values = {'writings':writings, 'logout_url':logout_url, 'user':user}
+        template = jinja_environment.get_template("user_writings.html")
+        self.response.write(template.render(template_values))
 
 class AdminHandler(webapp2.RequestHandler):
     def get(self):
@@ -268,5 +280,6 @@ app = webapp2.WSGIApplication([
     ('/writing', WritingHandler),
     ('/adminCSSI16secrets', AdminHandler),
     ('/about_site', AboutSiteHandler),
-    ('/about_developers', AboutDevelopersHandler)
+    ('/about_developers', AboutDevelopersHandler),
+    ('/user_writings', UserPageHandler)
 ], debug=True)
