@@ -44,15 +44,11 @@
           <div class="prompt-container">
             <p class="date" > Written on {{writing.date}}</p>
                 <h1 class="story-title" id="user-story">{{writing.title}}</h1>
-                    <p class="author" > Written by {{writing.user_key.get().name}}</p>
-                    <p class="story-text">{{writing.text}}</p>
+                    <p class="author" > Written by <a href="{{writing.user_key.get().url()}}">{{writing.user_key.get().name}}</a></p>
+                    <p class="story-text" style="white-space:pre-wrap">{{writing.text}}</p>
             </div>
           </a>
       </div>
-
-      <h1>{{writing.title}}</h1>
-      <p class="date">Written by <a href="{{writing.user_key.get().url()}}">{{writing.user_key.get().name}}</a> on {{writing.date}}</p>
-      <p>{{writing.text}}</p>
 
       <form action="{{writing.url()}}" method="post">
         <button name="vote" value="1">Vote</button>
