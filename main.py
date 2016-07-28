@@ -4,7 +4,6 @@ import os
 import logging
 from google.appengine.ext import ndb
 from google.appengine.api import users
-#done importing
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir))
@@ -98,9 +97,6 @@ class UserHandler(webapp2.RequestHandler):
 #After login
 class HomeHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        if not user:
-            self.redirect("/user")
         logout_url = users.create_logout_url('/')
         prompt = Prompt.query().order(-Prompt.date).get()
 
@@ -139,10 +135,8 @@ class HomeHandler(webapp2.RequestHandler):
 
 class CreateHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        if not user:
-            self.redirect("/user")
         logout_url = users.create_logout_url('/')
+        user = users.get_current_user()
         username = user.nickname()
         prompt = Prompt.query().order(-Prompt.date).get()
         template_value = {"promptTitle":prompt.title, "promptText":prompt.text, 'logout_url':logout_url, "username":username}
@@ -168,9 +162,6 @@ class CreateHandler(webapp2.RequestHandler):
 
 class PastPromptHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        if not user:
-            self.redirect("/user")
         logout_url = users.create_logout_url('/')
         user = users.get_current_user()
         username = user.nickname()
@@ -181,9 +172,6 @@ class PastPromptHandler(webapp2.RequestHandler):
 
 class PastWritingsHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        if not user:
-            self.redirect("/user")
         logout_url = users.create_logout_url('/')
         user = users.get_current_user()
         username = user.nickname()
@@ -197,9 +185,6 @@ class PastWritingsHandler(webapp2.RequestHandler):
 
 class MyWritingsHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        if not user:
-            self.redirect("/user")
         logout_url = users.create_logout_url('/')
         user = users.get_current_user()
         username = user.nickname()
@@ -211,9 +196,6 @@ class MyWritingsHandler(webapp2.RequestHandler):
 
 class WritingHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        if not user:
-            self.redirect("/user")
         logout_url = users.create_logout_url('/')
 
         user = users.get_current_user()
@@ -272,9 +254,6 @@ class WritingHandler(webapp2.RequestHandler):
 
 class UserPageHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        if not user:
-            self.redirect("/user")
         logout_url = users.create_logout_url('/')
         user = users.get_current_user()
         username = user.nickname()
@@ -289,13 +268,8 @@ class UserPageHandler(webapp2.RequestHandler):
 
 class AdminHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        username = user.nickname()
-        if not user:
-            self.redirect("/user")
         template = jinja_environment.get_template("admin.html")
-        template_values = {"username":username}
-        self.response.write(template.render(template_values))
+        self.response.write(template.render())
 
     def post(self):
         text = self.request.get('text')
@@ -306,24 +280,16 @@ class AdminHandler(webapp2.RequestHandler):
 
 class AboutSiteHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        username = user.nickname()
-        if not user:
-            self.redirect("/user")
         logout_url = users.create_logout_url('/')
         template = jinja_environment.get_template("about_site.html")
-        template_values = {'logout_url':logout_url, "username":username}
+        template_values = {'logout_url':logout_url}
         self.response.write(template.render(template_values))
 
 class AboutDevelopersHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        username = user.nickname()
-        if not user:
-            self.redirect("/user")
         logout_url = users.create_logout_url('/')
         template = jinja_environment.get_template("about_developers.html")
-        template_values = {'logout_url':logout_url, "username":username}
+        template_values = {'logout_url':logout_url}
         self.response.write(template.render(template_values))
 
 app = webapp2.WSGIApplication([
