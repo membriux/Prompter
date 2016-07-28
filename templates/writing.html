@@ -69,7 +69,7 @@
 
       {% for comment in comments %}
         <div class="comment">
-          <p>{{comment.name}}</p>
+          <p><a href="{{comment.user_key.get().url()}}">{{comment.name}}</a></p>
           <p class="date">Posted on {{comment.date}}</p>
           <p>{{comment.text}}</p>
         </div>

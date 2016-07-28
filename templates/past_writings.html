@@ -49,7 +49,7 @@
             <a href="{{writing.url()}}">{{writing.title}}</a>
           </h2>
           <p class="date">Posted on {{writing.date}}</p>
-          <p>Written by {{writing.user_key.get().name}}</p>
+          <p>Written by <a href="{{writing.user_key.get().url()}}">{{writing.user_key.get().name}}</a></p>
         </div>
         {% endfor %}
 
