@@ -281,15 +281,19 @@ class AdminHandler(webapp2.RequestHandler):
 class AboutSiteHandler(webapp2.RequestHandler):
     def get(self):
         logout_url = users.create_logout_url('/')
+        user = users.get_current_user()
+        username = user.nickname()
         template = jinja_environment.get_template("about_site.html")
-        template_values = {'logout_url':logout_url}
+        template_values = {'logout_url':logout_url,'username':username}
         self.response.write(template.render(template_values))
 
 class AboutDevelopersHandler(webapp2.RequestHandler):
     def get(self):
         logout_url = users.create_logout_url('/')
+        user = users.get_current_user()
+        username = user.nickname()
         template = jinja_environment.get_template("about_developers.html")
-        template_values = {'logout_url':logout_url}
+        template_values = {'logout_url':logout_url,'username':username}
         self.response.write(template.render(template_values))
 
 app = webapp2.WSGIApplication([
