@@ -187,11 +187,26 @@ class MyWritingsHandler(webapp2.RequestHandler):
 
 class WritingHandler(webapp2.RequestHandler):
     def get(self):
+        logout_url = users.create_logout_url('/')
+
+        user = users.get_current_user()
+        nickname = user.nickname()
+        current_user = User.query(User.name==nickname).get()
+
+        writing_key_urlsafe = self.request.get('key')
+        writing_key = ndb.Key(urlsafe=writing_key_urlsafe)
+        writing = writing_key.get()
+
+        already_voted = writing.voted(current_user)
+        check_count = writing.voteCount()
+        writing.count = check_count
+        writing.put()
+
         urlsafe_key = self.request.get('key')
         key = ndb.Key(urlsafe=urlsafe_key)
         writing = key.get()
         comments = Comment.query(Comment.writing_key == key).order(Comment.date).fetch()
-        template_values = {'writing':writing, 'comments':comments}
+        template_values = {'writing':writing, 'comments':comments, 'logout_url':logout_url, "already_voted":already_voted}
         template = jinja_environment.get_template("writing.html")
         self.response.write(template.render(template_values))
 
@@ -210,9 +225,6 @@ class WritingHandler(webapp2.RequestHandler):
         #if vote button is pressed
         if vote:
             check_vote = writing.voted(current_user)
-            check_count = writing.voteCount()
-            writing.count = check_count
-            writing.put()
             if check_vote:
                 logging.info("You have already voted!")
             else:

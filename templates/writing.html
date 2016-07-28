@@ -51,7 +51,13 @@
       </div>
 
       <form action="{{writing.url()}}" method="post">
-        <button name="vote" value="1">Vote</button>
+        <button name="vote" value="1">{{writing.count}}: Vote(s)
+          {% if already_voted %}
+            &#x2605
+          {% else %}
+            &#x2606
+          {% endif %}
+        </button>
       </form>
 
 
