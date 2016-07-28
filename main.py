@@ -103,6 +103,9 @@ class HomeHandler(webapp2.RequestHandler):
         logout_url = users.create_logout_url('/')
         prompt = Prompt.query().order(-Prompt.date).get()
 
+        user = users.get_current_user()
+        username = user.nickname()
+
         #Filter writing from second to last prompt (second most recent)
         two_prompts = Prompt.query().order(-Prompt.date).fetch(2)
         #Order by date, most recent first
@@ -129,7 +132,7 @@ class HomeHandler(webapp2.RequestHandler):
         featured_story = most_vote.get()
         #Send writing.key to home and add it on featured bubble
 
-        template_value = {'logout_url':logout_url,"prompt":prompt, "featured_story":featured_story}
+        template_value = {'logout_url':logout_url,"prompt":prompt, "featured_story":featured_story, "username":username}
         template = jinja_environment.get_template("home.html")
         self.response.write(template.render(template_value))
 
@@ -139,8 +142,9 @@ class CreateHandler(webapp2.RequestHandler):
         if not user:
             self.redirect("/user")
         logout_url = users.create_logout_url('/')
+        username = user.nickname()
         prompt = Prompt.query().order(-Prompt.date).get()
-        template_value = {"promptTitle":prompt.title, "promptText":prompt.text, 'logout_url':logout_url}
+        template_value = {"promptTitle":prompt.title, "promptText":prompt.text, 'logout_url':logout_url, "username":username}
         template = jinja_environment.get_template("create.html")
         self.response.write(template.render(template_value))
 
@@ -167,8 +171,10 @@ class PastPromptHandler(webapp2.RequestHandler):
         if not user:
             self.redirect("/user")
         logout_url = users.create_logout_url('/')
+        user = users.get_current_user()
+        username = user.nickname()
         prompts = Prompt.query().order(-Prompt.date).fetch()
-        template_values = {'prompts':prompts, 'logout_url':logout_url}
+        template_values = {'prompts':prompts, 'logout_url':logout_url, "username":username}
         template = jinja_environment.get_template("past_prompts.html")
         self.response.write(template.render(template_values))
 
@@ -178,11 +184,13 @@ class PastWritingsHandler(webapp2.RequestHandler):
         if not user:
             self.redirect("/user")
         logout_url = users.create_logout_url('/')
+        user = users.get_current_user()
+        username = user.nickname()
         urlsafe_key = self.request.get('key')
         key = ndb.Key(urlsafe=urlsafe_key)
         prompt = key.get()
         writings = Writing.query(Writing.prompt_key == key).order(-Writing.date).fetch()
-        template_values = {'writings':writings, 'prompt':prompt, 'logout_url':logout_url}
+        template_values = {'writings':writings, 'prompt':prompt, 'logout_url':logout_url, "username":username}
         template = jinja_environment.get_template("past_writings.html")
         self.response.write(template.render(template_values))
 
@@ -193,10 +201,10 @@ class MyWritingsHandler(webapp2.RequestHandler):
             self.redirect("/user")
         logout_url = users.create_logout_url('/')
         user = users.get_current_user()
-        nickname = user.nickname()
-        current_user = User.query(User.name==nickname).get()
+        username = user.nickname()
+        current_user = User.query(User.name==username).get()
         writings = Writing.query(Writing.user_key == current_user.key).order(-Writing.date).fetch()
-        template_values = {'writings':writings, 'logout_url':logout_url}
+        template_values = {'writings':writings, 'logout_url':logout_url, "username":username}
         template = jinja_environment.get_template("my_writings.html")
         self.response.write(template.render(template_values))
 
@@ -208,8 +216,8 @@ class WritingHandler(webapp2.RequestHandler):
         logout_url = users.create_logout_url('/')
 
         user = users.get_current_user()
-        nickname = user.nickname()
-        current_user = User.query(User.name==nickname).get()
+        username = user.nickname()
+        current_user = User.query(User.name==username).get()
 
         writing_key_urlsafe = self.request.get('key')
         writing_key = ndb.Key(urlsafe=writing_key_urlsafe)
@@ -224,7 +232,7 @@ class WritingHandler(webapp2.RequestHandler):
         key = ndb.Key(urlsafe=urlsafe_key)
         writing = key.get()
         comments = Comment.query(Comment.writing_key == key).order(Comment.date).fetch()
-        template_values = {'writing':writing, 'comments':comments, 'logout_url':logout_url, "already_voted":already_voted}
+        template_values = {'writing':writing, 'comments':comments, 'logout_url':logout_url, "already_voted":already_voted, "username":username}
         template = jinja_environment.get_template("writing.html")
         self.response.write(template.render(template_values))
 
@@ -267,22 +275,26 @@ class UserPageHandler(webapp2.RequestHandler):
         if not user:
             self.redirect("/user")
         logout_url = users.create_logout_url('/')
+        user = users.get_current_user()
+        username = user.nickname()
         urlsafe_key = self.request.get('key')
         key = ndb.Key(urlsafe=urlsafe_key)
         user = key.get()
         #logging.info("You've made it to this page")
         writings = Writing.query(Writing.user_key == key).order(-Writing.date).fetch()
-        template_values = {'writings':writings, 'logout_url':logout_url, 'user':user}
+        template_values = {'writings':writings, 'logout_url':logout_url, 'user':user, "username":username}
         template = jinja_environment.get_template("user_writings.html")
         self.response.write(template.render(template_values))
 
 class AdminHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
+        username = user.nickname()
         if not user:
             self.redirect("/user")
         template = jinja_environment.get_template("admin.html")
-        self.response.write(template.render())
+        template_values = {"username":username}
+        self.response.write(template.render(template_values))
 
     def post(self):
         text = self.request.get('text')
@@ -294,21 +306,23 @@ class AdminHandler(webapp2.RequestHandler):
 class AboutSiteHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
+        username = user.nickname()
         if not user:
             self.redirect("/user")
         logout_url = users.create_logout_url('/')
         template = jinja_environment.get_template("about_site.html")
-        template_values = {'logout_url':logout_url}
+        template_values = {'logout_url':logout_url, "username":username}
         self.response.write(template.render(template_values))
 
 class AboutDevelopersHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
+        username = user.nickname()
         if not user:
             self.redirect("/user")
         logout_url = users.create_logout_url('/')
         template = jinja_environment.get_template("about_developers.html")
-        template_values = {'logout_url':logout_url}
+        template_values = {'logout_url':logout_url, "username":username}
         self.response.write(template.render(template_values))
 
 app = webapp2.WSGIApplication([
