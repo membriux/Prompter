@@ -32,8 +32,8 @@
           <div class="dropdown" id="account_container">
             <button class="dropbuttton" id="account_button"> My Account </button>
             <div class="dropdown-content" id="account_drop">
-              <a href="">Currently logged in as {{username}}</a>
               <a href="{{logout_url}}"> Logout </a>
+              <a href=""> Settings </a>
             </div>
           </div>
 
@@ -44,7 +44,7 @@
         <h1 id="my-writings">My Writings</h1>
 
         {% for writing in writings %}
-        <div class="bottom-container">
+        <div id="my-stories-list" class="bottom-container">
           <a class="story-title" id="my-story" href="{{writing.url()}}">
             <div class="story">
                 <h2 class="story-title"> {{writing.title}} </h2>

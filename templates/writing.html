@@ -30,48 +30,44 @@
         <div class="dropdown" id="account_container">
           <button class="dropbuttton" id="account_button"> My Account </button>
           <div class="dropdown-content" id="account_drop">
-            <a href="">Currently logged in as {{username}}</a>
             <a href="{{logout_url}}"> Logout </a>
+            <a href=""> Settings </a>
           </div>
         </div>
 
       </div>
       <!--  Put stuff here -->
-      <div class="back-button-container">
-        <a class="back-button" href=""> &#10094; Back </a>
-      </div>
       <div class="bottom-container">
           <div class="prompt-container">
             <p class="date" > Written on {{writing.date}}</p>
                 <h1 class="story-title" id="user-story">{{writing.title}}</h1>
-                    <p class="author" > Written by <a href="{{writing.user_key.get().url()}}">{{writing.user_key.get().name}}</a></p>
+                    <p class="author" > Written by
+                      <a class="username-author" href="{{writing.user_key.get().url()}}">
+                        {{writing.user_key.get().name}}</a></p>
                     <p class="story-text" style="white-space:pre-wrap">{{writing.text}}</p>
             </div>
           </a>
       </div>
 
       <form action="{{writing.url()}}" method="post">
-        <button name="vote" value="1">{{writing.count}}: Vote(s)
-          {% if already_voted %}
-            &#x2605
-          {% else %}
-            &#x2606
-          {% endif %}
+        <button class="vote-button"name="vote" value="1">+ Vote
+          <span class="vote-star">&#9733; </span>
         </button>
       </form>
 
 
       <form action="{{writing.url()}}" method="post">
-        <h3>Comments</h3>
-        <textarea name="comment" placeholder="Type your comment here"></textarea><br>
-        <button>Submit</button>
+        <h3 class="comment">Comments</h3>
+        <textarea class="input-comment" name="comment" placeholder="Type your comment here"></textarea><br>
+        <button class="submit-comment">Submit</button>
       </form>
 
       {% for comment in comments %}
-        <div class="comment">
-          <p><a href="{{comment.user_key.get().url()}}">{{comment.name}}</a></p>
-          <p class="date">Posted on {{comment.date}}</p>
-          <p>{{comment.text}}</p>
+        <div class="comment-container">
+          <p class="commenter">{{comment.name}}</p>
+          <p class="comment-text">{{comment.text}}</p>
+          <p class="date"> Posted {{comment.date}}</p>
+
         </div>
       {% endfor %}
 

@@ -4,8 +4,14 @@
 
 
 
+#my-stories-list {
+display: inline-block;
+}
+
 .story {
-  max-width: 33%;
+  display: inline-block;
+  min-width: 45%;
+
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   text-align: center;
   margin: 35px;
@@ -35,6 +41,8 @@
   color: black;
 }
 
+
+
 #my-story {
   text-align: center
 }
@@ -55,7 +63,7 @@
 .prompt-container {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  width: 99%;
+  max-width: 99%;
   height: auto;
   padding: 0;
   border: 0;
@@ -87,6 +95,7 @@
 }
 
 #all_prompts {
+  padding-left: 8px;
   text-align: left;
   text-decoration: none;
   font-size: 3em;
@@ -111,15 +120,19 @@
   font-weight: 200;
 }
 
+.prompt-container{
+  width: 99%;
+}
+
 #user-story {
   text-align: center;
   font-size: 2.3em;
 }
 
 
-
-
 .author {
+  text-decoration: none;
+  margin-top: -20px;
   text-align: center;
   font-weight: 500;
   font-size: 1.1em;
@@ -128,12 +141,93 @@
   padding: 15px;
 }
 
+.author-username {
+  color: #7f919e;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  font-size: 1.3em;
+  font-weight: 400;
+  text-decoration: none;
+}
 
 .story-text {
-  font-size: 1em;
+  font-size: 1.1em;
   max-height: 600px;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   width: 100%;
   text-align: left;
-  margin-bottom: 25px;
+  margin: 25px;
+}
+
+.vote-button {
+  background-color: white;
+  border: 2px solid #336699;
+  color:  #336699;
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  font-size: 1.3em;
+  font-weight: 400;
+}
+
+.vote-star {
+  color: yellow;
+}
+
+.comment {
+  font-size: 1.5em;
+  font-weight: 400;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  color: black;
+}
+
+.input-comment {
+  width: 50%;
+  height: auto;
+  font-size: 1em;
+  font-weight: 400;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  margin-bottom: 10px;
+}
+
+.submit-comment {
+  text-decoration: none;
+  font-size: 1em;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  font-weight: 200;
+  background-color: #336699;
+  padding: 10px 20px;
+  color: white;
+  border-style: none;
+}
+
+.submit-comment:hover {
+  background-color: #4080bf;
+}
+
+.comment-container {
+  width: 50%;
+  height: auto;
+}
+
+.comment-container:nth-child(2n) {
+background-color: #e6e6e6;
+}
+
+.commenter {
+  font-weight: 500;
+  font-size: 1em;
+  color: black;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  padding: 15px;
+  margin-bottom: -15px;
+}
+
+
+
+.comment-text {
+  font-weight: 500;
+  font-size: .85em;
+  color: #404040;
+  font-family: Arial , sans-serif;
+  padding: 10px;
+  margin-bottom: -15px;
 }

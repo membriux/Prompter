@@ -3,6 +3,7 @@
 
   <head>
     <link rel="stylesheet" href='stylesheets/home.css'>
+    <link rel="stylesheet" href='stylesheets/one.css'>
     <meta charset="utf-8">
     <title>Home</title>
   </head>
@@ -34,8 +35,8 @@
           <div class="dropdown" id="account_container">
             <button class="dropbuttton" id="account_button"> My Account </button>
             <div class="dropdown-content" id="account_drop">
-              <a href="">Currently logged in as {{username}}</a>
               <a href="{{logout_url}}"> Logout </a>
+              <a href=""> Settings </a>
             </div>
           </div>
 
@@ -57,9 +58,19 @@
           <div class="submit-button">
             <a class="submit" href="/create"> Submit Your Story &#10095;</a>
           </div>
-          <h2>Featured Story: {{featured_story.title}}</h2>
-            <p>{{featured_story.text}}<br><br>
-            Written by <a href="{{featured_story.user_key.get().url()}}">{{featured_story.user_key.get().name}}</a> on {{featured_story.date}}</p>
+
+
+          <div class="bottom-container">
+              <h2 id="featured-title">Featured Story:</h2>
+              <div class="prompt-container">
+                <p class="date" > Written on {{featured_story.date}}</p>
+                  <h1 class="story-title" id="user-story">{{featured_story.title}}</h1>
+                      <p class="author" > Written by <a href="{{featured_story.user_key.get().url()}}">
+                        {{featured_story.user_key.get().name}}</a></p>
+                      <p class="story-text" style="white-space:pre-wrap">{{featured_story.text}}</p>
+              </div>
+          </div>
+
       </div>
     </div>
 
