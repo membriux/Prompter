@@ -3,8 +3,9 @@
 
   <head>
     <link rel="stylesheet" href='stylesheets/home.css'>
+    <link rel="stylesheet" href='stylesheets/one.css'>
     <meta charset="utf-8">
-    <title>User Home</title>
+    <title>My Writings</title>
   </head>
 
   <body>
@@ -35,17 +36,23 @@
               <a href=""> Settings </a>
             </div>
           </div>
-          
+
         </div>
-        <!--  Put stuff here -->
-        <h1>My Writings</h1>
+
+        <!--  Put stuff below -->
+
+        <h1 id="my-writings">My Writings</h1>
 
         {% for writing in writings %}
-        <div>
-          <h2>
-            <a href="{{writing.url()}}">{{writing.title}}</a>
-          </h2>
-          <p class="date">Posted on {{writing.date}}</p>
+        <div class="bottom-container">
+          <a class="story-title" id="my-story" href="{{writing.url()}}">
+            <div class="story">
+                <h2 class="story-title"> {{writing.title}} </h2>
+                <div class="info-container">
+                  <p class="date">Posted on {{writing.date}}</p>
+                </div>
+              </div>
+            </a>
         </div>
         {% endfor %}
 

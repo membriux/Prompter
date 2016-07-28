@@ -1,4 +1,12 @@
 
+.create-main-content {
+  background-color: white;
+  min-height: 1300px;
+  height: auto;
+  margin: 0;
+  padding: 25px;
+}
+
 
 .respond {
   font-weight: bold;
@@ -23,6 +31,7 @@
 
 
 .rules {
+  line-height: 175%;
   font-weight: bold;
   border-radius: 3px;
   font-size: 1em;
@@ -30,6 +39,68 @@
   color: black;
 }
 
+
 .create {
-  
+width: 100%;
+display: flex;
+justify-content: center;
+}
+
+.story-title-container {
+  width: 100%;
+  height: auto;
+}
+
+.story-title {
+  font-size: 2em;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.write-text-container {
+  width: 100%;
+  height: 400px;
+  /*height: auto;*/
+  min-height: 500px;
+}
+
+.write-text {
+  font-size: 1em;
+  min-height: 300px;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 25px;
+}
+
+
+
+
+
+
+
+
+
+.submit-story-container {
+  display: flex;
+  justify-content: center;
+}
+
+.submit-story{
+  text-decoration: none;
+  font-size: 1.4em;
+  font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
+  font-weight: 200;
+  background-color: #336699;
+  padding: 12px;
+  color: white;
+  border-style: none;
+}
+
+.submit-story:hover {
+  background-color: #4080bf;
 }

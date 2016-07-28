@@ -5,13 +5,13 @@
     <link rel="stylesheet" href='stylesheets/home.css'>
     <link rel="stylesheet" href='stylesheets/create.css'>
     <meta charset="utf-8">
-    <title>User Home</title>
+    <title>Create</title>
   </head>
 
   <body>
     <div class="background">
 
-      <div class="main-content">
+      <div class="create-main-content">
 
         <div class="top-menu">
           <div>
@@ -53,13 +53,15 @@
             </div>
 
             <form class="create" action="/create" method="post">
-              <input name="title" placeholder="Title"><br>
-              <textarea name="text" placeholder="Write here"></textarea><br>
-              <button>Submit</button>
+              <div class="story-title-container"><input class="story-title" name="title" placeholder="Title">
+              <div class="write-text-container"><textarea class="write-text" name="text" placeholder="Write here"></textarea>
+              <div class="submit-story-container"> <button class="submit-story">Submit</button></div>
             </form>
 
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 
 
   </body>

@@ -28,7 +28,8 @@ a {
 
 .main-content {
   background-color: white;
-  height: 100% auto;
+  min-height: 1300px;
+  height: auto;
   margin: 0;
   padding: 25px;
 }
@@ -180,8 +181,8 @@ a {
   width: 96%;
   height: auto;
   padding: 5px;
-  background-color: #f2f2f2;
-  border: 15px solid #f2f2f2;
+  background-color: white;
+  border: 15px solid white;
   margin-bottom: 35px;
 }
 
@@ -213,20 +214,18 @@ a {
 }
 
 .view-responses {
-  margin-top: 15px;
+  margin: 15px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   flex-wrap: wrap;
-  border: solid 5px #f2f2f2;
   padding: 8px;
   border-radius: 5%;
   float: right;
   text-decoration: none;
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-family: 'Helvetica Neue', Helvetica ,Arial , sans-serif;
   font-weight: 200;
-  background-color: #f2f2f2;
   color: #336699;
 }
 
@@ -247,6 +246,7 @@ a {
   background-color: #336699;
   padding: 12px;
   color: white;
+  border-style: none;
 }
 
 .submit:hover{

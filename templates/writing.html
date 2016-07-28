@@ -2,6 +2,7 @@
 <title>{{writing.title}}</title>
 <head>
   <link rel="stylesheet" href='stylesheets/home.css'>
+  <link rel="stylesheet" href='stylesheets/one.css'>
   <meta charset="utf-8">
 </head>
 
@@ -36,14 +37,21 @@
 
       </div>
       <!--  Put stuff here -->
+      <div class="back-button-container">
+        <a class="back-button" href=""> &#10094; Back </a>
+      </div>
+      <div class="bottom-container">
+          <div class="prompt-container">
+            <p class="date" > Written on {{writing.date}}</p>
+                <h1 class="story-title" id="user-story">{{writing.title}}</h1>
+                    <p class="author" > Written by {{writing.user_key.get().name}}</p>
+                    <p class="story-text">{{writing.text}}</p>
+            </div>
+          </a>
+      </div>
 
-      <h1>{{writing.title}}</h1>
-      <p class="date">Written by <a href="{{writing.user_key.get().url()}}">{{writing.user_key.get().name}}</a> on {{writing.date}}</p>
-      <p>{{writing.text}}</p>
 
-      <form action="{{writing.url()}}" method="post">
-        <button name="vote" value="1">Vote</button>
-      </form>
+
 
       <form action="{{writing.url()}}" method="post">
         <h3>Comments</h3>
@@ -53,7 +61,7 @@
 
       {% for comment in comments %}
         <div class="comment">
-          <p><a href="{{comment.user_key.get().url()}}">{{comment.name}}</a></p>
+          <p>{{comment.name}}</p>
           <p class="date">Posted on {{comment.date}}</p>
           <p>{{comment.text}}</p>
         </div>

@@ -3,8 +3,9 @@
 
   <head>
     <link rel="stylesheet" href='stylesheets/home.css'>
+      <link rel="stylesheet" href='stylesheets/one.css'>
     <meta charset="utf-8">
-    <title>Past Prompts</title>
+    <title>All Prompts</title>
   </head>
 
   <body>
@@ -35,18 +36,27 @@
               <a href=""> Settings </a>
             </div>
           </div>
-          
+
         </div>
         <!--  Put stuff here -->
 
-        <h1>All Prompts</h1>
+        <h1 id="all_prompts">All Prompts</h1>
         {% for prompt in prompts %}
-        <div>
-          <h2>
-            <a href="{{prompt.url()}}">{{prompt.title}}</a>
-          </h2>
-          <p>Posted on {{prompt.date}}</p>
+        <div class="bottom-container">
+            <div class="prompt-container">
+              <div class="responses-container">
+                <a class="view-responses" href="{{prompt.url()}}"> View Responses &#10095; </a>
+              </div>
+              <h2>
+                <a class="prompt" href="{{prompt.url()}}">{{prompt.title}}</a>
+              </h2>
+                <div class="info-container" >
+                  <p class="date">Posted on {{writing.date}}</p>
+                </div>
+              </div>
+            </a>
         </div>
+
         {% endfor %}
 
       </div>
