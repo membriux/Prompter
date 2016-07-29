@@ -39,17 +39,22 @@
         </div>
         <!--  Put stuff here -->
 
-        <h1>Writings For:</h1>
+        <h1 class="writings-for-title">Writings For:</h1>
         <h2>{{prompt.title}}</h2>
         <p><em>{{prompt.text}}</em></p>
 
         {% for writing in writings %}
-        <div>
-          <h2>
-            <a href="{{writing.url()}}">{{writing.title}}</a>
-          </h2>
-          <p class="date">Posted on {{writing.date.strftime('%B %d, %Y %I:%M')}}</p>
-          <p>Written by <a href="{{writing.user_key.get().url()}}">{{writing.user_key.get().name}}</a></p>
+        <div class="stories-list" class="bottom-container">
+          <a class="story-title" id="my-story" href="{{writing.url()}}">
+            <div class="story">
+                <h2 class="story-title"> {{writing.title}}</h2>
+                <div class="info-container">
+                  <p class="written-by"> Written by <a id="writings-author" href="{{writing.user_key.get().url()}}">
+                      {{writing.user_key.get().name}}</a></p>
+                  <p class="writing-date">Posted on {{writing.date.strftime('%B %d, %Y %I:%M')}}</p>
+                </div>
+              </div>
+            </a>
         </div>
         {% endfor %}
 
