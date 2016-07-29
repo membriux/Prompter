@@ -68,7 +68,7 @@
 
       {% for comment in comments %}
         <div class="comment-container">
-          <p class="commenter">{{comment.name}}</p>
+          <p class="commenter"><a href="{{comment.user_key.get().url()}}">{{comment.name}}</a></p>
           <p class="comment-text">{{comment.text}}</p>
           <p class="date"> Posted {{comment.date.strftime('%B %d, %Y %I:%M')}}</p>
 
