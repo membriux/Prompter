@@ -50,8 +50,12 @@
       </div>
 
       <form action="{{writing.url()}}" method="post">
-        <button class="vote-button"name="vote" value="1">+ Vote
-          <span class="vote-star">&#9733; </span>
+        <button class="vote-button"name="vote" value="1">{{writing.count}}: Vote(s)
+          {% if already_voted %}
+            <span class="vote-star">&#9733; </span>
+          {% else %}
+            &#x2606
+          {% endif %}
         </button>
       </form>
 
