@@ -39,7 +39,7 @@
       <!--  Put stuff here -->
       <div class="bottom-container">
           <div class="prompt-container">
-            <p class="date" > Written on {{writing.date}}</p>
+            <p class="date" > Written on {{writing.date.strftime('%B %d, %Y %I:%M')}}</p>
                 <h1 class="story-title" id="user-story">{{writing.title}}</h1>
                     <p class="author" > Written by
                       <a class="username-author" href="{{writing.user_key.get().url()}}">
@@ -66,7 +66,7 @@
         <div class="comment-container">
           <p class="commenter">{{comment.name}}</p>
           <p class="comment-text">{{comment.text}}</p>
-          <p class="date"> Posted {{comment.date}}</p>
+          <p class="date"> Posted {{comment.date.strftime('%B %d, %Y %I:%M')}}</p>
 
         </div>
       {% endfor %}

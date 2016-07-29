@@ -51,7 +51,7 @@
                 <a class="prompt" href="{{prompt.url()}}">{{prompt.title}}</a>
               </h2>
                 <div class="info-container" >
-                  <p class="date">Posted on {{prompt.date}}</p>
+                  <p class="date">Posted on {{prompt.date.strftime('%B %d, %Y %I:%M')}}</p>
                 </div>
               </div>
             </a>

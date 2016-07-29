@@ -63,7 +63,7 @@
           <div class="bottom-container">
               <h2 id="featured-title">Featured Story:</h2>
               <div class="prompt-container">
-                <p class="date" > Written on {{featured_story.date}}</p>
+                <p class="date" > Written on {{featured_story.date.strftime('%B %d, %Y %I:%M')}}</p>
                   <h1 class="story-title" id="user-story">{{featured_story.title}}</h1>
                       <p class="author" > Written by <a href="{{featured_story.user_key.get().url()}}">
                         {{featured_story.user_key.get().name}}</a></p>

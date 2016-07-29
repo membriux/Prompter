@@ -45,7 +45,7 @@
           <h2>
             <a href="{{writing.url()}}">{{writing.title}}</a>
           </h2>
-          <p class="date">Posted on {{writing.date}}</p>
+          <p class="date">Posted on {{writing.date.strftime('%B %d, %Y %I:%M')}}</p>
         </div>
         {% endfor %}
 
