@@ -3,6 +3,7 @@
 
   <head>
     <link rel="stylesheet" href='stylesheets/home.css'>
+    <link rel="stylesheet" href='stylesheets/one.css'>
     <meta charset="utf-8">
     <title>{{user.name}}'s Writings</title>
   </head>
@@ -38,14 +39,18 @@
 
         </div>
         <!--  Put stuff here -->
-        <h1>Writings By {{user.name}}</h1>
+        <h1 class="writings-for-title">Writings By {{user.name}}</h1>
 
         {% for writing in writings %}
-        <div>
-          <h2>
-            <a href="{{writing.url()}}">{{writing.title}}</a>
-          </h2>
-          <p class="date">Posted on {{writing.date.strftime('%B %d, %Y %I:%M')}}</p>
+        <div class="stories-list" class="bottom-container">
+          <a class="story-title" id="my-story" href="{{writing.url()}}">
+            <div class="story">
+                <h2 class="story-title"> {{writing.title}}</h2>
+                <div class="info-container">
+                  <p class="writing-date">Posted on {{writing.date.strftime('%B %d, %Y %I:%M')}}</p>
+                </div>
+              </div>
+            </a>
         </div>
         {% endfor %}
 

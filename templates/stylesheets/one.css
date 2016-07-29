@@ -16,18 +16,21 @@
 
 .stories-list {
   display: inline-block;
-  min-width: 45%;
+  margin-right: -110px;
+  min-width: 33%;
+  max-width: 45%;
+  max-height: 100px;
 }
 
 .story {
   align-items: center;
   display: inline-block;
-
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   text-align: center;
   margin: 35px;
   word-wrap: break-word;
-  height: auto;
+  min-height: 50px;
+
 }
 
 .story:hover {

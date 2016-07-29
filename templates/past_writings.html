@@ -3,6 +3,7 @@
 
   <head>
     <link rel="stylesheet" href='stylesheets/home.css'>
+    <link rel="stylesheet" href='stylesheets/one.css'>
     <meta charset="utf-8">
     <title>Writings for the Prompt</title>
   </head>
@@ -40,8 +41,10 @@
         <!--  Put stuff here -->
 
         <h1 class="writings-for-title">Writings For:</h1>
-        <h2>{{prompt.title}}</h2>
-        <p><em>{{prompt.text}}</em></p>
+        <div class="prompt-container">
+          <h2 class="prompt-title">{{prompt.title}}</h2>
+          <p><em class="prompt-text">{{prompt.text}}</em></p>
+        </div>
 
         {% for writing in writings %}
         <div class="stories-list" class="bottom-container">
