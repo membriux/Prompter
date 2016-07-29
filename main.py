@@ -266,7 +266,7 @@ class WritingHandler(webapp2.RequestHandler):
             writing_key_urlsafe = self.request.get('key')
             writing_key = ndb.Key(urlsafe=writing_key_urlsafe)
             writing = writing_key.get()
-            current_user = users.get_current_user()
+            user = users.get_current_user()
             username = user.nickname()
             comment = Comment(text=text, name=username, writing_key=writing.key, user_key=current_user.key)
             comment.put()
