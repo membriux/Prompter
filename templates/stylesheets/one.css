@@ -12,23 +12,23 @@
 
 
 
-/*
+
 
 .stories-list {
   display: inline-block;
-  word-wrap: break-word;
-  width: 90%;
+  min-width: 45%;
 }
 
 .story {
+  align-items: center;
   display: inline-block;
+
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   text-align: center;
-  margin: 20px;
+  margin: 35px;
   word-wrap: break-word;
-  max-height: 300px;
-  overflow:scroll;
-}*/
+  height: auto;
+}
 
 .story:hover {
   position: relative;
@@ -45,6 +45,7 @@
 
 .story-title {
   padding: 15px;
+  text-align: center;
   margin-top: 10px;
   font-size: 1.3em;
   font-weight: 400;
@@ -66,7 +67,6 @@
 
 .date {
   text-align: center;
-  width: 150px;
   font-weight: 500;
   font-size: .55em;
   color: #7f919e;
