@@ -120,6 +120,7 @@ a {
 }
 
 #account_container {
+  word-wrap: break-word;
   width: 130px;
 }
 
@@ -253,6 +254,14 @@ a {
 
 .submit:hover{
   background-color: #4080bf;
+}
+
+.story-container {
+  margin: 25px;
+  max-height: 450px;
+
+  width: 95%;
+  word-wrap: break-word;
 }
 
 #featured-title {

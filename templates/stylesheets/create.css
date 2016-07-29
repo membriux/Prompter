@@ -66,9 +66,11 @@ justify-content: center;
   height: 400px;
   /*height: auto;*/
   min-height: 500px;
+  overflow: scroll;
 }
 
 .write-text {
+  border-color: #bfbfbf;
   font-size: 1em;
   min-height: 300px;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
