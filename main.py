@@ -26,7 +26,7 @@ class User(ndb.Model):
         return '/user_writings?key=' + self.key.urlsafe()
 
 class Prompt(ndb.Model):
-    text = ndb.StringProperty()
+    text = ndb.TextProperty()
     title = ndb.StringProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)
 
@@ -35,7 +35,7 @@ class Prompt(ndb.Model):
 
 class Writing(ndb.Model):
     title = ndb.StringProperty()
-    text = ndb.StringProperty()
+    text = ndb.TextProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)
     user_key = ndb.KeyProperty(kind=User)
     prompt_key = ndb.KeyProperty(kind=Prompt)
